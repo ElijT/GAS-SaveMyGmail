@@ -1,0 +1,298 @@
+<!--Based on Boostrap model
+Author: Toto
+
+A core function
+Save Gmail as PDFs
+-------------------------------------------
+
+Developped as webapp by Toto...
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+
+    <!-- Bootstrap core CSS -->
+
+    <!-- Custom styles for this template 
+    <link href="navbar.css" rel="stylesheet">
+    
+
+    Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">-->
+    <?!= HtmlService.createHtmlOutputFromFile('bootstrap_css').getContent(); ?>
+        <?!= //HtmlService.createHtmlOutputFromFile('bootstrap_nocdn').getContent(); ?>
+</head>
+
+
+<body>
+
+<!-- Static navbar -->
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Save my Gmail</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="#navbar">Home</a>
+                        </li>
+                        <li>
+                            <a href="#what">What</a>
+                        </li>
+                        <li>
+                            <a href="#App">Run the App</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings 
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#Settings">Set labels</a>
+                                </li>
+                                <li>
+                                    <a href="#Triggers">Set triggers</a>
+                                </li>
+                                
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Help</li>
+                                <li>
+                                    <a href="#" data-toggle="modal" data-target="#HelpModal">Instructions</a>
+                                </li>
+                                <li>
+                                    <a href="mailto:test">Contact</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <!--Right menu
+              
+              <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li><li><a href="../navbar-static-top/">Static top</a></li><li><a href="../navbar-fixed-top/">Fixed top</a></li>
+              -->
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+            <!--/.container-fluid -->
+        </nav>
+
+    <div class="container">
+        
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron" id="what">
+            <h1>Save My Gmail</h1>
+            <p class="lead">This application as the ability to take all your emails and save them as pdf in your google drive. The application will create one file for each convesation. Atachements are saved in their original format. Three main modes exist: 1) Run application in the background, 2) Run Application on demand 3) Save only attachments - Run only on demand
+
+            </p>
+            <p>
+                <a class="btn btn-lg btn-primary" role="button" data-toggle="modal" data-target="#HelpModal">Detailled Instructions</a>
+            </p>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="HelpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Detailled Instructions</h4>
+                    </div>
+                    <div class="modal-body">
+                       
+            <p>This application will allow to backup Gmail messages to Gdrive painlessly. You have three main modalities of backup and two ways to trigger backups.</p>
+            <h3>Modalities</h3>
+            <ul>
+              <li>Backup all Gmail conversations labelled with the Noattachements label (defined in the settings) as PDF in GDrive.</li>
+              <li>Backup all Gmail conversations labelled with the Attachements label (defined in the settings) as PDF in GDrive, AND backup all attachements in the same Gdrive folder.</li>
+              <li>Backup ONLY Attachements within conversations labelled with the Attachements label (defined in the settings) in GDrive.</li>
+            </ul>
+            <h3>Triggers</h3>
+            <ul>
+              <li>Time defined: The script will run every 5 minutes and process Gmail conversations as they are coming.</li>
+              <li>User defined: The script will be run on user request.</li>
+            </ul>
+            <p>The label should be applied to the GMail conversations on top of any other labels that might be present. Once the conversations is processed the "Save My GMail" labelled is automatically removed.</p>
+               </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Modal -->
+
+        <!-- Message -->
+
+        <!-- Message -->
+
+
+
+        <!-- /container -->
+
+
+        <!-- what -->
+        <div id='Count' class="poll_desc">
+       
+            <h3>Gmail messages labelled</h3>
+            <div class="poll_desc">
+                To be saved with attachements:  <span id="NBAtta">none</span>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 5%" id="countAtta">
+                    <span class="sr-only">0</span>
+                </div>
+            </div>
+            <div class="poll_desc">
+                To be saved without attachements: <span id="NBNo">none</span>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 5%" id="countNo">
+                    <span class="sr-only">0</span>
+                </div>
+            </div>
+        </div>
+        <!-- /what -->
+        <!-- Start -->
+        <div id='App' class="page-header">
+            <h1>Start Application</h1>
+            <div id="head_run" class="alert alert-info" role="alert">Waiting for start command...</div>
+        </div>
+
+        <!-- Run application on demand with various preconfigured settings -->
+        <div class="media panel panel-default">
+
+            <div class="media-left media-middle">
+                <button id="runonce" type="button" class="btn btn-primary btn-sq"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span></button>
+            </div>
+            <div class="media-body panel-body">
+                <h4 class="media-heading">Run application once with saved parameters</h4>
+                This will process all emails labelleds in Gmail at once, and save them in Gdrive according to saved parameters
+
+            </div>
+        </div>
+        <div class="media panel panel-default">
+            <div class="media-body panel-body">
+                <h4 class="media-heading">Save Attachements only </h4>
+                This run will extract all attachements, but won't save any email
+                <p>The emails should be labelled with the label used to save emails AND attachements</p>
+            </div>
+            <div class="media-right media-middle">
+                <button id="runatta" type="button" class="btn btn-primary btn-sq"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span></button>
+            </div>
+        </div>
+        <!-- /Start -->
+
+        <!-- Settings -->
+        <div id="Settings" class="container">
+            <h1> <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Settings</h1>
+            <p>Please verify settings before each run if you are not sure..</p>
+            
+        <div class="alert alert-warning alert-dismissible" role="alert" id="head_set">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Warning!</strong> Better check yourself, you're not looking too good.
+        </div>
+
+            <!-- Labels information used by the program -->
+            <h3>Gmail labels are used to identify conversations in Gmail that need to be saved!</h3>
+            <div class="input-group" style="margin-left: 50px;">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span></span>
+                <input type="text" class="form-control" id="label_attach" placeholder="Label used for saving emails AND attachments" aria-describedby="basic-addon1" data-toggle="tooltip" data-placement="right" title="The Gmail label will need to be applied to emails that need to be saved, on top of other labels. Once the email is saved the label is automatically removed.">
+            </div>
+            <br>
+            <div class="input-group" style="margin-left: 50px;">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span></span>
+                <input type="text" class="form-control" id="label_Noattach" placeholder="Label used for saving emails ONLY" aria-describedby="basic-addon1" data-toggle="tooltip" data-placement="right" title="The Gmail label will need to be applied to emails that need to be saved, on top of other labels. Once the email is saved the label is automatically removed.">
+            </div>
+
+            <!-- Gdrive information -->
+            <h3>Setting GDrive folder
+                <p>The Gdrive folder will be used to save Gmail message in pdf, and saving attachements</p>
+            </h3>
+            <div class="input-group" style="margin-left: 50px;">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></span>
+                <input type="text" class="form-control" id="folder_attach" placeholder="Target Gdrive folder used for emails and attachements" aria-describedby="basic-addon1" data-toggle="tooltip" data-placement="right" title="The Gdrive folder will be used to save Gmail message in pdf. It will save attachements in their original format.">
+            </div>
+            <br>
+            <div class="input-group" style="margin-left: 50px;">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></span>
+                <input type="text" class="form-control" id="folder_Noattach" placeholder="Target Gdrive folder used for emails" aria-describedby="basic-addon1" data-toggle="tooltip"  data-placement="right" title="The Gdrive folder will be used to save Gmail message in pdf">
+            </div>
+            <div>
+                <h3>Saving and loading settings</h3>
+                <p>
+                    <input id="butt" type="button" class="btn btn-info" value="Load Data">
+                    <input id="butt2" type="button" class="btn btn-primary" value="Save Data">
+                </p>
+            </div>
+        </div>
+
+
+        <!-- /Settings -->
+        <!-- Triggers -->
+        <div id="Triggers" class="container">
+            <h1><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Settings to configure background running</h1>
+
+            <!-- Set triggers to run application in the background -->
+            <div id="background">
+                <p>Triggers are set every five minutes when running in background</p>
+                <div id="trigger_info" class="alert alert-success" role="alert"></div>
+                <input id="triggerON" type="button" value="Set triggers" class="btn btn-primary btn-lg active">
+                <input id="triggerOFF" type="button" value="Remove triggers" class="btn btn-default btn-lg active">
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <!-- /Triggers -->
+    <!-- Footer================================================== -->
+    <div class="footer">
+        <div class="container">
+            <p class="text-muted">Save my Gmail have been brought to you by Toto using Google Apps Script</p>
+        </div>
+        <div class="footer_bottom">
+            <div class="copy">
+                <p>Copyright &copy; 2015 for me. No rights reserved.</p>
+            </div>
+            <a href="#" id="toTop" style="display: block;">
+                <span id="toTopHover" style="opacity: 1;"></span>
+            </a>
+        </div>
+    </div>
+
+
+
+    <!-- Bootstrap core JavaScript================================================== -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <?!= HtmlService.createHtmlOutputFromFile('SmG-Scripts').getContent(); ?>
+
+</body>
+
+</html>

@@ -1,0 +1,144 @@
+<script>
+//Bootstrap functions
+    $('#myModal').on('shown.bs.modal', function() {
+        $('#myInput').focus()
+    });
+    $(function() {
+        $('[data-toggle="popover"]').popover()
+    });
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+
+//Count message to be treated et retrieve settings
+    $(document).ready(function() {
+         getSettings();
+         getMessagecount();
+     });
+     
+    function getMessagecount() {
+        google.script.run.withSuccessHandler(displayCount).countmsg();       
+    };
+    function displayCount(foo) {
+        var Atta = foo[0];
+        var NoAt = foo[1];
+        
+        document.getElementById("NBAtta").innerHTML = Atta;
+        document.getElementById("NBNo").innerHTML = NoAt;
+        if (Atta >0) {document.getElementById('countAtta').setAttribute("style", "width: 100%");};
+        if (NoAt >0) {document.getElementById('countNo').setAttribute("style", "width: 100%");};
+    };
+    
+    
+    
+    
+//User settings - This scripts will retrieve and save the user specific setting for Labels and gdrive used
+    
+    document.getElementById('butt').addEventListener("click", getSettings);
+    document.getElementById('butt2').addEventListener("click", saveSettings);
+    
+    var InputSettings = ["label_attach", "folder_attach", "label_Noattach", "folder_Noattach"]; 
+//function help(){document.getElementById('divhelp').style.display = 'block';};
+
+    function success(foo,foo2) {
+        document.getElementById(foo2).innerHTML = foo
+    };
+    function success1(foo,foo2) {
+        document.getElementById(foo2).value = foo;
+    };
+
+    
+    function getSettings() {
+        var x;
+        for (i = 0; i < InputSettings.length; i++) {
+           var data = document.getElementById(InputSettings[i]).id;
+           google.script.run.withSuccessHandler(success1).withUserObject(data).ParseScript(data);   
+        }
+        document.getElementById("head_set").innerHTML = 'Retrieved';
+    }
+
+    function saveSettings() {
+        var x;
+        for (i = 0; i < InputSettings.length; i++) {
+        var data = document.getElementById(InputSettings[i]).value;
+           google.script.run.withSuccessHandler(success).withUserObject('head_set').SaveScript(InputSettings[i], data)   
+        }
+    }
+
+    //Run Application on demand
+    document.getElementById('runonce').addEventListener("click", Once);
+    document.getElementById('runatta').addEventListener("click", OnceA);
+
+    function succ(foo) {
+        document.getElementById('head_run').innerHTML = foo;
+        document.getElementById('head_run').setAttribute("class", "alert alert-success");
+    };
+
+    function lert(foo) {
+        document.getElementById('alert').innerHTML = foo
+    };
+    var UpdateCount;
+    function Once() {
+        getMessagecount();
+        google.script.run.withSuccessHandler(succ).RunNow();
+        document.getElementById('head_run').innerHTML = 'Run initiated!';
+        document.getElementById('head_run').setAttribute("class", "alert alert-warning");
+        
+        UpdateCount = setInterval(function(){ 
+                 google.script.run.withSuccessHandler(displayProg).countmsg(); 
+             }, 1000);
+    }
+
+    function OnceA() {
+        getMessagecount();
+        google.script.run.withSuccessHandler(succ).saveAttachements();
+        document.getElementById('head_run').innerHTML = 'Run initiated only for attachements!';
+        document.getElementById('head_run').style.backgroundColor = '#00CC00';
+         UpdateCount = setInterval(function(){ 
+                 google.script.run.withSuccessHandler(displayProg).countmsg(); 
+             }, 1000);
+    }
+
+
+    function displayProg(foo) {
+        var Atta = foo[0];
+        var NoAt = foo[1];
+        
+        var OAtta = document.getElementById("NBAtta").innerHTML;
+        var ONoAt = document.getElementById("NBNo").innerHTML;
+        if (OAtta >0) {
+            var ProgAtta = 'width: ' + ((Atta/OAtta)*100) + '%';
+            document.getElementById('countAtta').setAttribute("style", ProgAtta);
+        };
+              
+        if (ONoAt >0) {
+            var ProgNoAtta = 'width: ' + ((NoAt/ONoAt)*100) + '%';
+            document.getElementById('countNo').setAttribute("style", ProgNoAtta);
+        };
+        
+        if ((Atta + NoAt) == 0) {
+            clearInterval(UpdateCount);};
+        
+    };
+    //Check if triggers are set, and how many
+    window.onload = Trig_Stat;
+    function Trig_Stat() {
+        google.script.run.withSuccessHandler(success).withUserObject('trigger_info').trigstat();
+    }
+    //Set triggers
+    document.getElementById('triggerON').addEventListener("click", Trig_ON);
+    document.getElementById('triggerOFF').addEventListener("click", Trig_OFF);
+    
+    function Trig_ON() {
+        google.script.run.withSuccessHandler(success).withUserObject('trigger_info').configure();
+    }function Trig_OFF() {
+        google.script.run.withSuccessHandler(success).withUserObject('trigger_info').reset();
+    }
+
+    //Display element
+    function Display(foo) {
+
+        document.getElementById(foo).style.display = 'block';
+        document.getElementById('display').style.display = 'none';
+    }
+</script>
