@@ -1,6 +1,6 @@
 # GAS-SaveMyGmail
 
-Save My Gmail is a program written in Google Apps Script ([Apps Script](https://developers.google.com/apps-script/)) that can be used to ackup gmail message and attachements in GDrive.
+Save My Gmail is a program written in Google Apps Script ([Apps Script](https://developers.google.com/apps-script/)) that can be used to backup gmail message and attachements in GDrive.
 
 
 This application will allow to backup Gmail messages to Gdrive painlessly. You have three main modalities of backup and two ways to trigger backups.
